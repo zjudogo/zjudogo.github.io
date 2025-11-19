@@ -148,7 +148,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/19/vscode-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/19/vscode_rsync/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -162,7 +162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/11/19/vscode-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">vscode 远程连接(服务器)</a>
+            <a href="/2025/11/19/vscode_rsync/" class="post-title-link" itemprop="url">vscode 远程连接(服务器)</a>
         </h2>
 
         <div class="post-meta">
@@ -171,8 +171,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2025-11-19 11:43:31" itemprop="dateCreated datePublished" datetime="2025-11-19T11:43:31+03:00">2025-11-19</time>
+              <time title="Created: 2025-11-19 11:43:31 / Modified: 12:16:36" itemprop="dateCreated datePublished" datetime="2025-11-19T11:43:31+03:00">2025-11-19</time>
             </span>
 
           
@@ -186,7 +187,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h2 id="1-目的"><a href="#1-目的" class="headerlink" title="1. 目的"></a>1. 目的</h2><p>我使用过 vscode 和 pycharm 的远程编写代码&#x2F;远程调试的功能。</p>
+<p>vscode: 通过安装 remote 插件，在远程端(服务器) 执行一个监听的脚本。<br>特点:</p>
+<ol>
+<li>没有本地代码，所有代码都在远程端(服务器)，所有代码都是及时同步的。</li>
+<li>CPU 占用极高，如果远程端(服务器)，只有 2 核 + 2G，很快达到 CPU 占用 100%，出现无法重启的问题。</li>
+<li>当代码量巨大的时候，打开文件会出现问题。</li>
+</ol>
+<p>PyCharm: 通过 rsync 插件(专业版自带)，在远程端(服务器)进行执行 rsync 指令。<br>特点:</p>
+<ol>
+<li>有本地代码，代码需要本地编写，通过指令 rsync 上传到远程端(服务器)。 <br>[专业版能在文件保存的同时自动进行上传]。</li>
+<li>但是并不能及时同步。rsync 的同步是单向的。默认是 [本地端]-&gt;[远程端] 同步。 <br>比如，你的代码生成了一张图片，这张图片只存在[远程端]。<br>解决方案是: 手动指定同步方向 [远程端]-&gt;[本地端]。</li>
+</ol>
+<p>我非常喜欢 pycharm 远程编写代码的模式，但是我也很喜欢 vscode 占用内存小，大量的开源工具。</p>
+<p>我的目的是:</p>
+<ol>
+<li>在 vscode 中实现 pycharm 远程代码同步的功能。</li>
+</ol>
+<h2 id="2-解决方案"><a href="#2-解决方案" class="headerlink" title="2. 解决方案"></a>2. 解决方案</h2><p>vscode 的插件库除了 remote-ssh 其实还有 rsync。<br>但是 rsync 的下载量不大。 <br>我使用的是 vscode-ext.sync-rsync</p>
+<p><img src="/1.vscode_rsync/vscode-ext.sync-rsync.png" alt="vscode-ext.sync-rsync"></p>
+<h3 id="2-1-setting-json"><a href="#2-1-setting-json" class="headerlink" title="2.1 setting.json"></a>2.1 setting.json</h3><p>主要的内容是编写 setting.json 文件。</p>
+<p><img src="/1.vscode_rsync/setting.json.png" alt="setting.json"></p>
+<p>红色部分为 rsync 相关的 参数。 <br>在绿色部分中填写自己的远程 IP 地址。</p>
+<h3 id="2-2-免密-ssh"><a href="#2-2-免密-ssh" class="headerlink" title="2.2 免密 ssh"></a>2.2 免密 ssh</h3><p>建议设置免密的 ssh 登录。 </p>
+<ol>
+<li>在本地生成密钥[本地端执行] <br><code>ssh-keygen -t rsa -b 4096</code></li>
+<li>拷贝公钥到远端[本地端执行] <br><code>ssh-copy-id root@远程IP</code></li>
+</ol>
+<h3 id="2-3-vscode-output"><a href="#2-3-vscode-output" class="headerlink" title="2.3 vscode-output"></a>2.3 vscode-output</h3><p>查看同步的情况:</p>
+<p><img src="/1.vscode_rsync/rsync-output.png" alt="alt text"></p>
+
       
     </div>
 
