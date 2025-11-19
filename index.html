@@ -173,7 +173,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2025-11-19 12:22:34 / Modified: 12:23:49" itemprop="dateCreated datePublished" datetime="2025-11-19T12:22:34+03:00">2025-11-19</time>
+              <time title="Created: 2025-11-19 12:22:34 / Modified: 12:24:22" itemprop="dateCreated datePublished" datetime="2025-11-19T12:22:34+03:00">2025-11-19</time>
             </span>
 
           
@@ -205,9 +205,9 @@
 <li>在 vscode 中实现 pycharm 远程代码同步的功能。</li>
 </ol>
 <h2 id="2-解决方案"><a href="#2-解决方案" class="headerlink" title="2. 解决方案"></a>2. 解决方案</h2><p>vscode 的插件库除了 remote-ssh 其实还有 rsync。<br>但是 rsync 的下载量不大。 <br>我使用的是 vscode-ext.sync-rsync</p>
-<p><img src="/1.vscode_rsync/vscode-ext.sync-rsync.png" alt="vscode-ext.sync-rsync"></p>
+<p><img src="/vscode-ext.sync-rsync.png" alt="vscode-ext.sync-rsync"></p>
 <h3 id="2-1-setting-json"><a href="#2-1-setting-json" class="headerlink" title="2.1 setting.json"></a>2.1 setting.json</h3><p>主要的内容是编写 setting.json 文件。</p>
-<p><img src="/1.vscode_rsync/setting.json.png" alt="setting.json"></p>
+<p><img src="/setting.json.png" alt="setting.json"></p>
 <p>红色部分为 rsync 相关的 参数。 <br>在绿色部分中填写自己的远程 IP 地址。</p>
 <h3 id="2-2-免密-ssh"><a href="#2-2-免密-ssh" class="headerlink" title="2.2 免密 ssh"></a>2.2 免密 ssh</h3><p>建议设置免密的 ssh 登录。 </p>
 <ol>
@@ -215,7 +215,7 @@
 <li>拷贝公钥到远端[本地端执行] <br><code>ssh-copy-id root@远程IP</code></li>
 </ol>
 <h3 id="2-3-vscode-output"><a href="#2-3-vscode-output" class="headerlink" title="2.3 vscode-output"></a>2.3 vscode-output</h3><p>查看同步的情况:</p>
-<p><img src="/1.vscode_rsync/rsync-output.png" alt="alt text"></p>
+<p><img src="/rsync-output.png" alt="alt text"></p>
 
       
     </div>
